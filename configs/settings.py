@@ -3,9 +3,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field, PostgresDsn, ValidationError
 from typing import Optional
 
-# This file defines the application's configuration using Pydantic's BaseSettings.
-# It automatically reads environment variables from a `.env` file or the system environment.
-# This approach provides type validation and a centralized point for all settings.
 
 class Settings(BaseSettings):
     """
@@ -38,20 +35,17 @@ class Settings(BaseSettings):
     MILVUS_PASSWORD: Optional[str] = Field(None, description="Optional password for Milvus")
     
     # --- Agent Behavior Configuration ---
-    # This section centralizes parameters that control the agent's reasoning.
     SCHEMA_SEARCH_TOP_K: int = Field(5, description="Number of relevant schema snippets to retrieve")
     FEW_SHOT_TOP_K: int = Field(3, description="Number of few-shot examples to retrieve")
     MEMORY_SEARCH_TOP_K: int = Field(5, description="Number of relevant memories to retrieve for a user")
 
-    # --- Assembled Database URL ---
-    # This will be dynamically constructed, not read from .env
     DATABASE_URL: Optional[str] = None
     
     model_config = SettingsConfigDict(
         env_file='.env',
         env_file_encoding='utf-8',
         case_sensitive=False,
-        extra='ignore' # Ignore extra fields from environment
+        extra='ignore' 
     )
     
     def __init__(self, **values):
@@ -79,7 +73,6 @@ except ValidationError as e:
     print(e)
     raise SystemExit("Configuration validation failed.") from e
 
-# Example of how to use it and verify that it's working:
 if __name__ == "__main__":
     print("--- Application Settings Loaded Successfully ---")
     print(f"Database Host: {settings.DB_HOST}")
