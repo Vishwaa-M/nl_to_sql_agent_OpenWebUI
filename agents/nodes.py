@@ -1,13 +1,3 @@
-"""
-This module defines the nodes of the LangGraph. Each node is a step in the
-agent's reasoning process.
-
-REFACTORING V10 (HITL Removal):
-- The `verification_node` has been completely removed.
-- The `query_execution_node` has been simplified to be fully autonomous. It no
-  longer checks for user approval ('approve'/'reject') and directly executes
-  the generated SQL query.
-"""
 
 import logging
 import json
