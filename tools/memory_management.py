@@ -1,28 +1,16 @@
-"""
-This module provides the core tools for the agent's long-term memory system.
-It leverages a metadata-aware VectorStoreManager to efficiently and securely
-store and retrieve user-specific memories.
 
-V2 Update:
-- Removed asyncio.run() wrappers to prevent nested event loop issues in async frameworks.
-- Centralized the 'top_k' parameter to be managed by the application settings.
-"""
 
 import logging
 from typing import Dict, Any
 
 from langchain_core.tools import tool
 
-# FIX 1: Import the settings object to access centralized configuration.
 from configs.settings import settings
 from core.vector_store import get_vector_store_manager, MEMORY_COLLECTION_NAME
 
 # Configure a dedicated logger for these tools
 logger = logging.getLogger(__name__)
 
-
-# FIX 2: The tool is now defined directly on the async function.
-# The sync wrapper and StructuredTool.from_function have been removed.
 @tool
 async def load_memory(user_id: str, query: str) -> str:
     """
