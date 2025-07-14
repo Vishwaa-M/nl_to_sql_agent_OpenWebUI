@@ -1,13 +1,3 @@
-"""
-This module contains the core, enterprise-grade tools for interacting with the
-database and the vector store for SQL-related tasks.
-
-REFACTORING V3 (Definitive Fix):
-- Removed the buggy `sqlvalidator` library check. The database engine itself
-  serves as the ultimate and most reliable validator. Errors are caught and
-  handled by the self-correction loop.
-- The `execute_sql_query` tool now correctly relies on the `dict_row` factory.
-"""
 
 import logging
 from typing import Dict, Any, List
@@ -84,7 +74,6 @@ async def execute_sql_query(sql_query: str) -> Dict[str, Any]:
         logger.error(error_message)
         return {"query_result": None, "sql_error": error_message}
 
-    # REMOVED the faulty sqlvalidator check block.
 
     try:
         async with get_db_connection() as conn:
@@ -103,7 +92,6 @@ async def execute_sql_query(sql_query: str) -> Dict[str, Any]:
     except PsycopgError as e:
         error_message = f"Database Execution Error: {e}"
         logger.error(error_message, exc_info=True)
-        # Return the specific database error to the self-correction node
         return {"query_result": None, "sql_error": str(e)}
     
     except Exception as e:
