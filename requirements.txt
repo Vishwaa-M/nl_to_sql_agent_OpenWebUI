@@ -1,0 +1,42 @@
+## Core Application Framework ---
+fastapi
+uvicorn[standard]
+
+## LLM and Agent Frameworks ---
+langgraph
+mistralai
+tenacity
+
+## Database Connector ---
+## Use psycopg[pool] to include connection pooling capabilities ---
+psycopg[pool]
+aiosqlite
+langgraph-checkpoint-sqlite
+langgraph-checkpoint-postgres
+psycopg2-binary
+
+##Configuration Management ---
+pydantic-settings
+python-dotenv
+
+## Data Science and Visualization (for later) ---
+pandas
+plotly
+
+## UI layer
+chainlit
+
+## VectorDB ---
+pymilvus
+sentence-transformers
+
+## Visualization code execution ---
+RestrictedPython
+kaleido
+
+## Testing
+pytest
+pytest-asyncio
+
+## OpenWebUI ---
+passlib
