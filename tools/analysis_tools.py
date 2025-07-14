@@ -1,13 +1,4 @@
-"""
-This module provides high-level tools for data analysis and summarization.
-It also includes a robust, programmatic tool for creating Plotly visualizations
-directly from a structured plan.
 
-REFACTORING V8:
-- Added support for scatter, heatmap, box, and histogram chart types in `create_plotly_figure` to align with the updated VISUALIZATION_PLANNING_PROMPT_TEMPLATE.
-- Updated `ChartComponent` Pydantic model to include `z_axis` for heatmap charts.
-- Maintained robust handling of Decimal types and data validation.
-"""
 
 import logging
 import json
